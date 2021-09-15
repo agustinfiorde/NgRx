@@ -55,7 +55,7 @@ import { MessagesService } from './messages/message.service';
 
   ],
   imports: [
-    EffectsModule.forRoot(),
+    // EffectsModule.forRoot(),
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,

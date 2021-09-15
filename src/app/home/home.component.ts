@@ -10,6 +10,7 @@ import { CoursesStore } from "../services/courses.store";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomeComponent implements OnInit {
+
   beginnerCourses$: Observable<Course[]>;
   advancedCourses$: Observable<Course[]>;
 
