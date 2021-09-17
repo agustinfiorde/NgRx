@@ -2,6 +2,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
 import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -37,6 +38,8 @@ import { LoadingComponent } from './loading/loading.component';
 import { CoursesCardListComponent } from './courses-card-list/courses-card-list.component';
 import { LoadingService } from './loading/loading.service';
 import { MessagesService } from './messages/message.service';
+import { CourseEffects } from './store/effects/course.effects';
+import { CourseReducer } from './store/reducers/course.reducer';
 
 @NgModule({
   declarations: [
@@ -55,7 +58,10 @@ import { MessagesService } from './messages/message.service';
 
   ],
   imports: [
-    // EffectsModule.forRoot(),
+    StoreModule.forRoot({
+      courses: CourseReducer
+    }),
+    EffectsModule.forRoot([CourseEffects]),
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,

@@ -9,11 +9,10 @@ import { AuthStore } from "./services/auth.store";
   styleUrls: ["./app.component.css"],
 })
 export class AppComponent implements OnInit {
+
   constructor(public auth: AuthStore) {}
 
   ngOnInit() {
-
-
   }
 
   logout() {

@@ -1,8 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { Observable } from "rxjs";
-import { Message } from "../model/message";
+import { Store } from "@ngrx/store";
 import { tap } from "rxjs/operators";
-import { MessagesService } from "./message.service";
+import { AppState } from "../store/models/app-state.model";
+import { LoadCourseAction } from "../store/actions/course.actions";
 
 @Component({
   selector: "messages",
@@ -11,21 +12,16 @@ import { MessagesService } from "./message.service";
 })
 export class MessagesComponent implements OnInit {
 
-  showMessages = false;
-  errors$: Observable<string[]>;
+  showMessages$ : Observable<boolean> = this.store.select((store) => store.courses.showMessages);
+  errors$: Observable<string[]> = this.store.select((store) => store.courses.error);
 
-  constructor(public messageServices: MessagesService) {
-    console.log("se creo el message component");
-  }
+  constructor(private store: Store<AppState> ) {}
 
   ngOnInit() {
-    this.errors$ = this.messageServices.errors$
-    .pipe(
-      tap(()=>this.showMessages = true)
-    );
+    this.store.dispatch(new LoadCourseAction());
   }
 
   onClose() {
-    this.showMessages = false;
+    this.showMessages$.subscribe()
   }
 }
